@@ -12,7 +12,7 @@ const Home = ({ searchValue }) => {
   const [isloading, setISLoading] = useState(false);
   const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState('rating');
-
+  console.log();
   useEffect(() => {
     setISLoading(true);
 
