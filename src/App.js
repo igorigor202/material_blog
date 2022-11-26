@@ -12,7 +12,7 @@ import Cart from './pages/Cart.jsx';
 function App() {
   const [mode, setMode] = useState('light');
   const [searchValue, setSearchValue] = useState('');
-
+  console.log();
   const darkTheme = createTheme({
     palette: {
       mode: mode,
