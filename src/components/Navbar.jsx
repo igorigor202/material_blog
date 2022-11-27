@@ -18,6 +18,8 @@ import { FastfoodRounded, ShoppingBasket } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import { useContext } from 'react';
+import { SearchContext } from '../App.js';
 
 const StyledToolbar = styled(Toolbar)({ display: 'flex', justifyContent: 'space-between' });
 
@@ -76,14 +78,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Navbar = ({ searchValue, setSearchValue }) => {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const { searchValue, setSearchValue } = useContext(SearchContext);
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
         <Typography
           component={Link}
-          to="/"
+          to="/material_shop1"
           variant="h6"
           sx={{ display: { xs: 'none', sm: 'block' }, textDecoration: 'none', color: 'white' }}>
           Nagibin Shop
