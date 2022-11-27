@@ -2,7 +2,7 @@
   "name": "material_blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://igorigor202.github.io/material_shop1/",
+  "homepage": "https://igorigor202.github.io/material_blog/",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
