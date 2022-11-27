@@ -87,7 +87,7 @@ const Navbar = () => {
       <StyledToolbar>
         <Typography
           component={Link}
-          to="/material_blog"
+          to="/material_shop"
           variant="h6"
           sx={{ display: { xs: 'none', sm: 'block' }, textDecoration: 'none', color: 'white' }}>
           Nagibin Shop

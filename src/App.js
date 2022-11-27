@@ -32,7 +32,7 @@ function App() {
             justifyContent="space-around">
             <Sidebar setMode={setMode} mode={mode} />
             <Routes>
-              <Route path="/material_blog" element={<Home />} />
+              <Route path="/material_shop" element={<Home />} />
               <Route path="/*" element={<NotFound />} />
               <Route path="/cart" element={<Cart />} />
             </Routes>
