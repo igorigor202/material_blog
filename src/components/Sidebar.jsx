@@ -17,7 +17,7 @@ const Sidebar = ({ mode, setMode }) => {
       <Box position={'fixed'}>
         <List>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/material_shop">
+            <ListItemButton component={Link} to="/material_blog">
               <ListItemIcon>
                 <Home />
               </ListItemIcon>
@@ -25,7 +25,7 @@ const Sidebar = ({ mode, setMode }) => {
             </ListItemButton>
           </ListItem>
           <ListItem disabled disablePadding>
-            <ListItemButton component="a">
+            <ListItemButton component={Link} to="/*">
               <ListItemIcon>
                 <Pages />
               </ListItemIcon>

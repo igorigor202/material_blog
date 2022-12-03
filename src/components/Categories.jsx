@@ -1,6 +1,5 @@
 import { Box, Button } from '@mui/material';
-import React, { useState } from 'react';
-import Sort from './Sort.jsx';
+import React from 'react';
 
 const Categories = ({ categoryId, onChangeCategory }) => {
   const categories = ['Все', 'Adidas', 'Nike', 'New balance'];

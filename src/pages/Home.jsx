@@ -1,5 +1,6 @@
 import { Box, Grid } from '@mui/material';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId, setSortType } from '../redux/slices/filterSlice.js';
 import React, { useState } from 'react';
 import Post from '../components/Post.jsx';
 import { useEffect } from 'react';
@@ -11,12 +12,23 @@ import { useContext } from 'react';
 import { SearchContext } from '../App.js';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { categoryId, sortType } = useSelector((state) => state.filter);
+
+  const onChangeCategory = (id) => {
+    console.log(id);
+    dispatch(setCategoryId(id));
+  };
+
+  const onChangeSort = (i) => {
+    console.log(i);
+    dispatch(setSortType(i));
+  };
+
   const { searchValue } = useContext(SearchContext);
   const [posts, setPosts] = useState([]);
   const [isloading, setISLoading] = useState(false);
-  const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortType, setSortType] = useState('rating');
 
   useEffect(() => {
     setISLoading(true);
@@ -58,8 +70,8 @@ const Home = () => {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <Categories categoryId={categoryId} onChangeCategory={(i) => setCategoryId(i)} />
-        <Sort sortType={sortType} onChangeSort={(i) => setSortType(i)} />
+        <Categories categoryId={categoryId} onChangeCategory={onChangeCategory} />
+        <Sort sortType={sortType} onChangeSort={onChangeSort} />
       </Box>
 
       <Grid
