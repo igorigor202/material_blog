@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/material_blog/static/js/main.70556120.js",
+    "main.js": "/material_blog/static/js/main.8fa685af.js",
     "index.html": "/material_blog/index.html",
-    "main.70556120.js.map": "/material_blog/static/js/main.70556120.js.map"
+    "main.8fa685af.js.map": "/material_blog/static/js/main.8fa685af.js.map"
   },
   "entrypoints": [
-    "static/js/main.70556120.js"
+    "static/js/main.8fa685af.js"
   ]
 }
