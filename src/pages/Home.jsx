@@ -1,6 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setSortType } from '../redux/slices/filterSlice.js';
+import { setCategoryId, setCurrentPage, setSortType } from '../redux/slices/filterSlice.js';
 import React, { useState } from 'react';
 import Post from '../components/Post.jsx';
 import { useEffect } from 'react';
@@ -8,27 +8,29 @@ import Categories from '../components/Categories.jsx';
 import Preloader from '../components/Preloader.jsx';
 import Sort from '../components/Sort.jsx';
 import BasicPagination from '../components/BasicPagination.jsx';
+import axios from 'axios';
 import { useContext } from 'react';
 import { SearchContext } from '../App.js';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { categoryId, sortType } = useSelector((state) => state.filter);
-
+  const { categoryId, sortType, currentPage } = useSelector((state) => state.filter);
   const onChangeCategory = (id) => {
     console.log(id);
     dispatch(setCategoryId(id));
   };
-
   const onChangeSort = (i) => {
     console.log(i);
     dispatch(setSortType(i));
+  };
+  const onChangePage = (number) => {
+    console.log(number);
+    dispatch(setCurrentPage(number));
   };
 
   const { searchValue } = useContext(SearchContext);
   const [posts, setPosts] = useState([]);
   const [isloading, setISLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setISLoading(true);
@@ -38,14 +40,12 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(
-      `https://62fafe68abd610251c00224e.mockapi.io/posts?p=${currentPage}&l=5&${category}&sortBy=${sortBy}&order=${order}${search}`,
-    )
+    axios
+      .get(
+        `https://62fafe68abd610251c00224e.mockapi.io/posts?p=${currentPage}&l=5&${category}&sortBy=${sortBy}&order=${order}${search}`,
+      )
       .then((res) => {
-        return res.json();
-      })
-      .then((arr) => {
-        setPosts(arr);
+        setPosts(res.data);
         setISLoading(false);
       });
   }, [categoryId, sortType, searchValue, currentPage]);
@@ -89,10 +89,7 @@ const Home = () => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <BasicPagination
-          currentPage={currentPage}
-          onChangePage={(number) => setCurrentPage(number)}
-        />
+        <BasicPagination currentPage={currentPage} onChangePage={onChangePage} />
       </Box>
     </Box>
   );

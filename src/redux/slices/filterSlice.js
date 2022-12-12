@@ -3,11 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   categoryId: 0,
   sortType: 'rating',
+  currentPage: 1,
 };
 
 export const filterSlice = createSlice({
-  name: 'changeCategory', //название склада
-  initialState, //начальное состояние (аналог useState)
+  name: 'changeCategory',
+  initialState,
   reducers: {
     setCategoryId: (state, action) => {
       state.categoryId = action.payload;
@@ -15,9 +16,12 @@ export const filterSlice = createSlice({
     setSortType: (state, action) => {
       state.sortType = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { setCategoryId, setSortType } = filterSlice.actions; // экспортируем все экшены выше
+export const { setCategoryId, setSortType, setCurrentPage } = filterSlice.actions; // экспортируем все экшены выше
 
-export default filterSlice.reducer; //reducer - функция
+export default filterSlice.reducer;

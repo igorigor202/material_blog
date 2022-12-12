@@ -10,7 +10,6 @@ import {
   Menu,
   MenuItem,
   alpha,
-  Button,
   IconButton,
 } from '@mui/material';
 import React, { useState } from 'react';
@@ -20,6 +19,9 @@ import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { useContext } from 'react';
 import { SearchContext } from '../App.js';
+import { useRef } from 'react';
+import debounce from 'lodash.debounce';
+import { useCallback } from 'react';
 
 const StyledToolbar = styled(Toolbar)({ display: 'flex', justifyContent: 'space-between' });
 
@@ -81,6 +83,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [value, setValue] = useState('');
+
+  const inputRef = useRef();
+
+  const onClearInput = () => {
+    setSearchValue('');
+    setValue('');
+    inputRef.current.focus();
+  };
+
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 1000),
+    [],
+  );
+
+  const onChangeInput = (event) => {
+    setValue(event.target.value);
+    updateSearchValue(event.target.value);
+  };
 
   return (
     <AppBar position="sticky">
@@ -105,14 +128,15 @@ const Navbar = () => {
           </SearchIconWrapper>
 
           <StyledInputBase
+            value={value}
+            ref={inputRef}
+            onChange={onChangeInput}
             sx={{ widht: '95%' }}
             placeholder="Найти..."
-            value={searchValue}
-            onChange={(event) => setSearchValue(event.target.value)}
             inputProps={{ 'aria-label': 'search' }}
           />
-          {searchValue && (
-            <IconButton onClick={() => setSearchValue('')}>
+          {value && (
+            <IconButton onClick={onClearInput}>
               <CloseIcon />
             </IconButton>
           )}

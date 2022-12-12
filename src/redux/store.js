@@ -3,6 +3,6 @@ import filter from './slices/filterSlice.js'; // название любое д�
 
 export const store = configureStore({
   reducer: {
-    filter, //можно просто counterReducer и соотственнно в App.js
+    filter, //название для слайса любое
   },
 });
