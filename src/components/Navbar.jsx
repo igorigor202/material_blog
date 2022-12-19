@@ -23,7 +23,10 @@ import { useRef } from 'react';
 import debounce from 'lodash.debounce';
 import { useCallback } from 'react';
 
-const StyledToolbar = styled(Toolbar)({ display: 'flex', justifyContent: 'space-between' });
+const StyledToolbar = styled(Toolbar)({
+  display: 'flex',
+  justifyContent: 'space-between',
+});
 
 const Icons = styled(Box)(({ theme }) => ({
   display: 'none',
@@ -64,25 +67,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    width: '50%',
+    width: '100%',
     [theme.breakpoints.up('xs')]: {
-      width: '15ch',
+      width: '9ch',
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '25ch',
     },
     [theme.breakpoints.up('md')]: {
       width: '50ch',
     },
-    [theme.breakpoints.up('md')]: {
-      width: '55ch',
+    [theme.breakpoints.up('lg')]: {
+      width: '85ch',
     },
   },
 }));
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [openBurger, setOpenBurger] = useState(false);
+
+  const { setSearchValue } = useContext(SearchContext);
   const [value, setValue] = useState('');
 
   const inputRef = useRef();
@@ -115,7 +120,30 @@ const Navbar = () => {
           sx={{ display: { xs: 'none', sm: 'block' }, textDecoration: 'none', color: 'white' }}>
           Nagibin Shop
         </Typography>
-        <FastfoodRounded sx={{ display: { xs: 'block', sm: 'none' } }} />
+        <IconButton color="inherit" onClick={(e) => setOpenBurger(true)}>
+          <FastfoodRounded sx={{ display: { xs: 'block', sm: 'none' } }} />
+        </IconButton>
+        <Menu
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          open={openBurger}
+          onClose={(e) => setOpenBurger(false)}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}>
+          <MenuItem component={Link} to="/material_blog">
+            Магазин
+          </MenuItem>
+          <MenuItem component={Link} to="/*">
+            Блог
+          </MenuItem>
+          <MenuItem>Мой аккаунт</MenuItem>
+        </Menu>
 
         <Search>
           <SearchIconWrapper
@@ -131,7 +159,6 @@ const Navbar = () => {
             value={value}
             ref={inputRef}
             onChange={onChangeInput}
-            sx={{ widht: '95%' }}
             placeholder="Найти..."
             inputProps={{ 'aria-label': 'search' }}
           />
@@ -143,15 +170,24 @@ const Navbar = () => {
         </Search>
 
         <Icons>
-          <Badge badgeContent={2} color="success">
-            <ShoppingBasket />
-          </Badge>
+          <IconButton component={Link} to="/cart">
+            <Badge badgeContent={1} color="success">
+              <ShoppingBasket />
+            </Badge>
+          </IconButton>
+
           <Avatar
             sx={{ width: 40, height: 40 }}
             src="https://avatarzo.ru/wp-content/uploads/squid-game-player456-2.jpg"
             onClick={(e) => setOpen(true)}
           />
         </Icons>
+
+        <IconButton component={Link} to="/cart" sx={{ display: { xs: 'block', sm: 'none' } }}>
+          <Badge badgeContent={1} color="success">
+            <ShoppingBasket />
+          </Badge>
+        </IconButton>
       </StyledToolbar>
       <Menu
         id="demo-positioned-menu"
@@ -164,11 +200,11 @@ const Navbar = () => {
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'left',
+          horizontal: 'right',
         }}>
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem>Профиль</MenuItem>
+        <MenuItem>Мой Аккаунт</MenuItem>
+        <MenuItem>Выйти</MenuItem>
       </Menu>
     </AppBar>
   );

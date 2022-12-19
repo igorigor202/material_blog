@@ -1,5 +1,14 @@
 import React from 'react';
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import {
+  Badge,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from '@mui/material';
 import Size from './Size.jsx';
 import { Box } from '@mui/system';
 
@@ -23,7 +32,20 @@ const Post = ({ image, title, price }) => {
           <CardActions>
             <Box>
               <Size />
-              <Button sx={{ marginTop: '15px' }}>Добавить в корзину</Button>
+              <Button
+                sx={{
+                  marginTop: '15px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Typography fontSize={18} variant="h6">
+                  Добавить в корзину
+                </Typography>
+                <Typography fontSize={18} sx={{ ml: '5px' }} variant="h6">
+                  0
+                </Typography>
+              </Button>
             </Box>
           </CardActions>
         </Card>

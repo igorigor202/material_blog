@@ -1,9 +1,14 @@
 import { Box, Grid } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setCurrentPage, setSortType } from '../redux/slices/filterSlice.js';
-import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  setCategoryId,
+  setCurrentPage,
+  setSortType,
+  setFilters,
+} from '../redux/slices/filterSlice.js';
+import React, { useState, useEffect, useRef } from 'react';
 import Post from '../components/Post.jsx';
-import { useEffect } from 'react';
 import Categories from '../components/Categories.jsx';
 import Preloader from '../components/Preloader.jsx';
 import Sort from '../components/Sort.jsx';
@@ -11,10 +16,19 @@ import BasicPagination from '../components/BasicPagination.jsx';
 import axios from 'axios';
 import { useContext } from 'react';
 import { SearchContext } from '../App.js';
+import qs from 'qs';
 
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { categoryId, sortType, currentPage } = useSelector((state) => state.filter);
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
+
+  const { searchValue } = useContext(SearchContext);
+  const [posts, setPosts] = useState([]);
+  const [isloading, setISLoading] = useState(false);
+
   const onChangeCategory = (id) => {
     console.log(id);
     dispatch(setCategoryId(id));
@@ -28,11 +42,7 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  const { searchValue } = useContext(SearchContext);
-  const [posts, setPosts] = useState([]);
-  const [isloading, setISLoading] = useState(false);
-
-  useEffect(() => {
+  const fetchSneakers = () => {
     setISLoading(true);
 
     const sortBy = sortType.replace('-', '');
@@ -48,6 +58,35 @@ const Home = () => {
         setPosts(res.data);
         setISLoading(false);
       });
+  };
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortType,
+        categoryId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
+
+  //Если был первый рендер, то проверяем URL-параметры и сохраняем в redux
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      dispatch(setFilters({ ...params }));
+      isSearch.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      fetchSneakers();
+    }
+    isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
   const sneakers = posts.map((obj) => (
@@ -62,7 +101,7 @@ const Home = () => {
   ));
 
   return (
-    <Box flex={35} sx={{}}>
+    <Box flex={35}>
       <Box
         sx={{
           display: 'flex',
