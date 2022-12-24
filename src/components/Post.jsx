@@ -33,17 +33,15 @@ const Post = ({ image, title, price }) => {
             <Box>
               <Size />
               <Button
+                variant="outlined"
                 sx={{
                   marginTop: '15px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <Typography fontSize={18} variant="h6">
+                <Typography fontSize={14} variant="h6">
                   Добавить в корзину
-                </Typography>
-                <Typography fontSize={18} sx={{ ml: '5px' }} variant="h6">
-                  0
                 </Typography>
               </Button>
             </Box>

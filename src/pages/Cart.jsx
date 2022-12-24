@@ -15,6 +15,7 @@ import Divider from '@mui/material/Divider';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import DeleteIcon from '@mui/icons-material/Delete';
+import HomeIcon from '@mui/icons-material/Home';
 
 const buttons = [
   <Button key="one">+</Button>,
@@ -24,7 +25,7 @@ const buttons = [
 
 const Cart = () => {
   return (
-    <Box flex={25}>
+    <Box flex={25} sx={{ height: '100vh' }}>
       <Box sx={{ p: '10px' }}>
         <Box
           sx={{
@@ -32,40 +33,26 @@ const Cart = () => {
             flexDirection: { xs: 'column', s: 'column', md: 'row' },
             justifyContent: 'space-between',
             alignItems: 'center',
-            mt: '30px',
           }}>
-          <Typography
+          <Box
             sx={{
-              height: '30px',
-              pl: { xs: 'none', s: '10px', md: '40px' },
-              mb: { xs: '30px', s: '30px', md: 'none' },
-              fontSize: { xs: '35px', s: '35px', md: '40px' },
+              pl: { xs: 'none', s: '10px', md: '10px' },
+              mb: { xs: '30px', s: '30px', md: '0px' },
               display: 'flex',
-              alignItems: 'center',
-            }}
-            variant="h2">
-            <LocalGroceryStoreIcon /> Корзина
-          </Typography>
-          <Button sx={{ height: '50px' }} variant="outlined" color="error">
-            Очистить корзину
-          </Button>
+            }}>
+            <Typography sx={{ fontSize: { xs: '35px', s: '35px', md: '40px' } }} variant="h2">
+              <LocalGroceryStoreIcon /> Корзина
+            </Typography>
+          </Box>
+
+          <Box>
+            <Button sx={{}} variant="outlined" color="error">
+              Очистить корзину
+            </Button>
+          </Box>
         </Box>
 
-        <List component="nav" aria-label="mailbox folders">
-          <ListItem>
-            <Box
-              sx={{
-                display: 'flex',
-                width: '100%',
-                justifyContent: 'space-between',
-              }}>
-              <Box>Товар</Box>
-              <Box>Товар</Box>
-            </Box>
-          </ListItem>
-        </List>
-
-        <Divider />
+        <Divider sx={{ mt: '10px' }} />
 
         <List component="nav" aria-label="mailbox folders">
           <ListItem>
@@ -127,6 +114,28 @@ const Cart = () => {
           </ListItem>
           <Divider />
         </List>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box>
+            <Typography variant="subtitle1">Всего товаров: 1</Typography>
+          </Box>
+          <Box>
+            <Typography variant="subtitle1">Сумма заказа: 30000 руб</Typography>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            mt: '30px',
+            justifyContent: 'space-between',
+          }}>
+          <Button variant="outlined">
+            <HomeIcon />
+            Вернуться назад
+          </Button>
+          <Button variant="outlined" color="success">
+            Перейти к оплате
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
