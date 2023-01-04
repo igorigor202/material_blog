@@ -1,29 +1,26 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  ButtonGroup,
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
-import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import DeleteIcon from '@mui/icons-material/Delete';
 import HomeIcon from '@mui/icons-material/Home';
-
-const buttons = [
-  <Button key="one">+</Button>,
-  <Button key="two">1</Button>,
-  <Button key="three">-</Button>,
-];
-
+import { useDispatch, useSelector } from 'react-redux';
+import CartItem from '../components/CartItem.jsx';
+import { clearItems } from '../redux/slices/cartSlice.js';
+import CartEmpty from '../components/CartEmpty.jsx';
 const Cart = () => {
+  const dispatch = useDispatch();
+  const { totalPrice, items } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const onClickClear = () => {
+    if (window.confirm('Очистить корзину?')) {
+      dispatch(clearItems());
+    }
+  };
+
+  if (!totalPrice) {
+    return <CartEmpty />;
+  }
+
   return (
     <Box flex={25} sx={{ height: '100vh' }}>
       <Box sx={{ p: '10px' }}>
@@ -46,7 +43,7 @@ const Cart = () => {
           </Box>
 
           <Box>
-            <Button sx={{}} variant="outlined" color="error">
+            <Button onClick={onClickClear} variant="outlined" color="error">
               Очистить корзину
             </Button>
           </Box>
@@ -54,72 +51,16 @@ const Cart = () => {
 
         <Divider sx={{ mt: '10px' }} />
 
-        <List component="nav" aria-label="mailbox folders">
-          <ListItem>
-            <Box
-              sx={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: { xs: 'column', sm: 'row', md: 'row' },
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <ShoppingBagIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Кроссовки Nike dunk What the Paul"
-                  secondary="Размер 10 US"
-                />
-              </Box>
+        {items.map((item) => (
+          <CartItem key={item.id} {...item} />
+        ))}
 
-              <Box
-                sx={{
-                  width: { xs: '100%', s: '70%', md: '50%' },
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}>
-                <Box
-                  sx={{
-                    width: { xs: '50%', s: '30%', md: '30%' },
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}>
-                  <ButtonGroup size="small" aria-label="small button group">
-                    {buttons}
-                  </ButtonGroup>
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    width: '25%',
-                  }}>
-                  <ListItemText primary="30000 руб" />
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}>
-                  <IconButton aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
-              </Box>
-            </Box>
-          </ListItem>
-          <Divider />
-        </List>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box>
-            <Typography variant="subtitle1">Всего товаров: 1</Typography>
+            <Typography variant="subtitle1">Всего товаров: {totalCount}</Typography>
           </Box>
           <Box>
-            <Typography variant="subtitle1">Сумма заказа: 30000 руб</Typography>
+            <Typography variant="subtitle1">Сумма заказа: {totalPrice} руб</Typography>
           </Box>
         </Box>
         <Box

@@ -13,13 +13,31 @@ import {
 } from '@mui/material';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch } from 'react-redux';
+import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice.js';
 
-const buttons = [
-  <Button key="one">+</Button>,
-  <Button key="two">1</Button>,
-  <Button key="three">-</Button>,
-];
-const CartItem = ({}) => {
+const CartItem = ({ id, title, price, count, image, size }) => {
+  const dispatch = useDispatch();
+  const onClickPlus = () => {
+    dispatch(addItem({ id }));
+  };
+  const onClickMinus = () => {
+    dispatch(minusItem(id));
+  };
+  const onClickRemove = () => {
+    if (window.confirm('Вы уверены, что хотите удалить товар?')) {
+      dispatch(removeItem(id));
+    }
+  };
+  const buttons = [
+    <Button onClick={onClickMinus} key="three">
+      -
+    </Button>,
+    <Button key="two">{count}</Button>,
+    <Button onClick={onClickPlus} key="one">
+      +
+    </Button>,
+  ];
   return (
     <List component="nav" aria-label="mailbox folders">
       <ListItem>
@@ -33,11 +51,11 @@ const CartItem = ({}) => {
           }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <ListItemAvatar>
-              <Avatar>
+              <Avatar src={image}>
                 <ShoppingBagIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Кроссовки Nike dunk What the Paul" secondary="Размер 10 US" />
+            <ListItemText primary={title} secondary={size} />
           </Box>
 
           <Box
@@ -62,14 +80,14 @@ const CartItem = ({}) => {
                 alignItems: 'center',
                 width: '25%',
               }}>
-              <ListItemText primary="30000 руб" />
+              <ListItemText primary={price * count + ' руб'} />
             </Box>
             <Box
               sx={{
                 display: 'flex',
                 justifyContent: 'flex-end',
               }}>
-              <IconButton aria-label="delete">
+              <IconButton onClick={onClickRemove} aria-label="delete">
                 <DeleteIcon />
               </IconButton>
             </Box>

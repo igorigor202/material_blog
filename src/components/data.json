@@ -3,64 +3,184 @@
     "id": "0",
     "image": "https://sun9-9.userapi.com/impg/WP3TzKgWGkXA3Lh4CMhrhnF8VqWoDjhMWsaq_w/y8qmF9v54UA.jpg?size=1920x1440&quality=96&sign=14bf833179f4b6682737dc96b0c60a0f&type=album",
     "title": "Nike dunk What the Paul",
-    "price": "55500 руб",
+    "price": 55500,
     "category": "2",
-    "rating": 4
+    "rating": 4,
+    "size": [
+      "12 US / 46 EU",
+      "11.5 US / 45.5 EU",
+      "11 US / 45 EU",
+      "10.5 US / 44.5 EU",
+      "10 US / 44 EU",
+      "9.5 US / 43 EU",
+      "9 US / 42.5 EU",
+      "8.5 US / 42 EU",
+      "8 US / 41 EU",
+      "7.5 US / 40.5 EU",
+      "7 US / 40 EU",
+      "6.5 US / 39 EU",
+      "6 US / 38.5 EU"
+    ]
   },
   {
     "id": "1",
     "image": "https://sun9-37.userapi.com/impg/_OGbvaTfg7hZurMFUAau7cYs-ffnpKjH3vta9A/i37hSpSNbCs.jpg?size=1920x1440&quality=96&sign=f79f213a9e43bd81850663c2916a36ad&type=album",
     "title": "Nike SB Dunk High Hawaii",
-    "price": "23000 руб",
+    "price": 23000,
     "category": "2",
-    "rating": 5
+    "rating": 5,
+    "size": [
+      "12 US / 46 EU",
+      "11.5 US / 45.5 EU",
+      "11 US / 45 EU",
+      "10.5 US / 44.5 EU",
+      "10 US / 44 EU",
+      "9.5 US / 43 EU",
+      "9 US / 42.5 EU",
+      "8.5 US / 42 EU",
+      "8 US / 41 EU",
+      "7.5 US / 40.5 EU",
+      "7 US / 40 EU",
+      "6.5 US / 39 EU",
+      "6 US / 38.5 EU"
+    ]
   },
   {
     "id": "2",
     "image": "https://sun9-49.userapi.com/impg/wb7ywNBcwxytaPnx_tYguqQ-Ui-l9aqTnSd1Fg/w0sdDwI0CZg.jpg?size=1920x1440&quality=96&sign=69b8ac5390cd2daad44a6d3866261c24&type=album",
     "title": "Nike Jordan 1 Retro High Hyper Royal Smoke Grey",
-    "price": "25500 руб",
+    "price": 25500,
     "category": "2",
-    "rating": 2
+    "rating": 2,
+    "size": [
+      "12 US / 46 EU",
+      "11.5 US / 45.5 EU",
+      "11 US / 45 EU",
+      "10.5 US / 44.5 EU",
+      "10 US / 44 EU",
+      "9.5 US / 43 EU",
+      "9 US / 42.5 EU",
+      "8.5 US / 42 EU",
+      "8 US / 41 EU",
+      "7.5 US / 40.5 EU",
+      "7 US / 40 EU",
+      "6.5 US / 39 EU",
+      "6 US / 38.5 EU"
+    ]
   },
   {
     "id": "3",
     "image": "https://sun9-83.userapi.com/impg/RcPpKiOiFxbU0GtwplSA9JZw5fPMWjyWYSS9Qw/G1Orkwh9aPM.jpg?size=1920x1440&quality=96&sign=e6495596748a787af4befc54aee6f91a&type=album",
     "title": "Adidas Yeezy 450 Cloud White",
-    "price": "16500 руб",
+    "price": 16500,
     "category": "1",
-    "rating": 7
+    "rating": 7,
+    "size": [
+      "12 US / 46 EU",
+      "11.5 US / 45.5 EU",
+      "11 US / 45 EU",
+      "10.5 US / 44.5 EU",
+      "10 US / 44 EU",
+      "9.5 US / 43 EU",
+      "9 US / 42.5 EU",
+      "8.5 US / 42 EU",
+      "8 US / 41 EU",
+      "7.5 US / 40.5 EU",
+      "7 US / 40 EU",
+      "6.5 US / 39 EU",
+      "6 US / 38.5 EU"
+    ]
   },
   {
     "id": "4",
     "image": "https://sun9-44.userapi.com/impg/JIJcokjKUvehBKdc_1U5ZpB9iHnylBnHq3tZpA/w7RbdmkdOFw.jpg?size=1920x1440&quality=96&sign=8e76f674cdee078e9a0920875742bfc5&type=album",
     "title": "Nike Jordan 1 Retro High Silver Toe (W)",
-    "price": "17000 руб",
+    "price": 17000,
     "category": "2",
-    "rating": 3
+    "rating": 3,
+    "size": [
+      "12 US / 46 EU",
+      "11.5 US / 45.5 EU",
+      "11 US / 45 EU",
+      "10.5 US / 44.5 EU",
+      "10 US / 44 EU",
+      "9.5 US / 43 EU",
+      "9 US / 42.5 EU",
+      "8.5 US / 42 EU",
+      "8 US / 41 EU",
+      "7.5 US / 40.5 EU",
+      "7 US / 40 EU",
+      "6.5 US / 39 EU",
+      "6 US / 38.5 EU"
+    ]
   },
   {
     "id": "5",
     "image": "https://sun9-79.userapi.com/impg/MtgmJax3jjAryyhq1p5QJve-APkoeHz47jS7HQ/d1eMkdHta5g.jpg?size=1920x1440&quality=96&sign=1f0cce90d0f564f7e077223eea7af662&type=album",
     "title": "Nike SB Dunk High Invert Celtics",
-    "price": "16500 руб",
+    "price": 16500,
     "category": "2",
-    "rating": 4
+    "rating": 4,
+    "size": [
+      "12 US / 46 EU",
+      "11.5 US / 45.5 EU",
+      "11 US / 45 EU",
+      "10.5 US / 44.5 EU",
+      "10 US / 44 EU",
+      "9.5 US / 43 EU",
+      "9 US / 42.5 EU",
+      "8.5 US / 42 EU",
+      "8 US / 41 EU",
+      "7.5 US / 40.5 EU",
+      "7 US / 40 EU",
+      "6.5 US / 39 EU",
+      "6 US / 38.5 EU"
+    ]
   },
   {
     "id": "6",
     "image": "https://sun9-41.userapi.com/impg/lsQ2ggs0aE4TalWgvZY0_1bWWpTvc4mgNLBdqQ/Osm35RK0eP0.jpg?size=2560x1920&quality=96&sign=98af5dafa4086650ccfd5d77702ed5f4&type=album",
     "title": "Adidas Yeezy 350 Carbon",
-    "price": "13500 руб",
+    "price": 13500,
     "category": "1",
-    "rating": 9
+    "rating": 9,
+    "size": [
+      "12 US / 46 EU",
+      "11.5 US / 45.5 EU",
+      "11 US / 45 EU",
+      "10.5 US / 44.5 EU",
+      "10 US / 44 EU",
+      "9.5 US / 43 EU",
+      "9 US / 42.5 EU",
+      "8.5 US / 42 EU",
+      "8 US / 41 EU",
+      "7.5 US / 40.5 EU",
+      "7 US / 40 EU",
+      "6.5 US / 39 EU",
+      "6 US / 38.5 EU"
+    ]
   },
   {
     "id": "7",
     "image": "https://myreact.ru/wp-content/uploads/2020/04/new-balance-990v5-grey-m990gl5.png",
     "title": "New balance 990v5",
-    "price": "17500 руб",
+    "price": 17500,
     "category": "3",
-    "rating": 1
+    "rating": 1,
+    "size": [
+      "12 US / 46 EU",
+      "11.5 US / 45.5 EU",
+      "11 US / 45 EU",
+      "10.5 US / 44.5 EU",
+      "10 US / 44 EU",
+      "9.5 US / 43 EU",
+      "9 US / 42.5 EU",
+      "8.5 US / 42 EU",
+      "8 US / 41 EU",
+      "7.5 US / 40.5 EU",
+      "7 US / 40 EU",
+      "6.5 US / 39 EU",
+      "6 US / 38.5 EU"
+    ]
   }
 ]

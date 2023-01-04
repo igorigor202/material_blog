@@ -22,6 +22,7 @@ import { SearchContext } from '../App.js';
 import { useRef } from 'react';
 import debounce from 'lodash.debounce';
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -110,6 +111,9 @@ const Navbar = () => {
     updateSearchValue(event.target.value);
   };
 
+  const { items } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -171,7 +175,7 @@ const Navbar = () => {
 
         <Icons>
           <IconButton component={Link} to="/cart">
-            <Badge badgeContent={1} color="success">
+            <Badge badgeContent={totalCount} color="success">
               <ShoppingBasket />
             </Badge>
           </IconButton>
@@ -184,7 +188,7 @@ const Navbar = () => {
         </Icons>
 
         <IconButton component={Link} to="/cart" sx={{ display: { xs: 'block', sm: 'none' } }}>
-          <Badge badgeContent={1} color="success">
+          <Badge badgeContent={totalCount} color="success">
             <ShoppingBasket />
           </Badge>
         </IconButton>

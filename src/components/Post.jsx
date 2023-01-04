@@ -1,18 +1,36 @@
 import React from 'react';
 import {
-  Badge,
+  Autocomplete,
   Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Grid,
+  TextField,
   Typography,
 } from '@mui/material';
-import Size from './Size.jsx';
 import { Box } from '@mui/system';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from '../redux/slices/cartSlice.js';
 
-const Post = ({ image, title, price }) => {
+const Post = ({ id, image, title, price, sizes }) => {
+  const [size, setValue] = React.useState(sizes[0]);
+  const [inputValue, setInputValue] = React.useState('');
+
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
+  const addedCount = cartItem ? cartItem.count : 0;
+  const onClickAdd = () => {
+    const item = {
+      id,
+      title,
+      price,
+      image,
+      size,
+    };
+    dispatch(addItem(item));
+  };
   return (
     <>
       <Grid item xs={10} sm={6} md={6} lg={4}>
@@ -27,12 +45,31 @@ const Post = ({ image, title, price }) => {
             <Typography fontSize={18} variant="h6" component="h5">
               {title}
             </Typography>
-            <Typography variant="body1">Цена: {price}</Typography>
+            <Typography variant="body1">Цена: {price} руб</Typography>
           </CardContent>
           <CardActions>
             <Box>
-              <Size />
+              <Autocomplete
+                value={size}
+                options={sizes}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+                inputValue={inputValue}
+                onInputChange={(event, newInputValue) => {
+                  setInputValue(newInputValue);
+                }}
+                size="small"
+                id="disable-clearable"
+                disableClearable
+                sx={{ width: { xs: '200px', sm: '250px', md: '280px', lg: '265px' } }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Выберите размер" variant="standard" />
+                )}
+              />
+
               <Button
+                onClick={onClickAdd}
                 variant="outlined"
                 sx={{
                   marginTop: '15px',
@@ -41,7 +78,7 @@ const Post = ({ image, title, price }) => {
                   justifyContent: 'center',
                 }}>
                 <Typography fontSize={14} variant="h6">
-                  Добавить в корзину
+                  Добавить в корзину {addedCount > 0 && <>{addedCount}</>}
                 </Typography>
               </Button>
             </Box>

@@ -92,11 +92,13 @@ const Home = () => {
   const sneakers = posts.map((obj) => (
     <Post
       key={obj.id}
+      id={obj.id}
       avatarUrl={obj.avatarUrl}
       title={obj.title}
       image={obj.image}
       text={obj.text}
       price={obj.price}
+      sizes={obj.size}
     />
   ));
 

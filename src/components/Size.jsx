@@ -7,7 +7,7 @@ const AllSize = [
   { label: '11 US / 45 EU' },
   { label: '10.5 US / 44.5 EU' },
   { label: '10 US / 44 EU' },
-  { label: '9.5 US / 43 EU45.5 EU' },
+  { label: '9.5 US / 43 EU' },
   { label: '9 US / 42.5 EU' },
   { label: '8.5 US / 42 EU' },
   { label: '8 US / 41 EU' },
