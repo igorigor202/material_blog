@@ -19,16 +19,18 @@ export const cartSlice = createSlice({
       }
       state.totalPrice = state.items.reduce((sum, obj) => {
         return obj.price * obj.count + sum;
-      }, 0); //суммируем при добавлении нового продукта его стоимость
+      }, 0);
     },
     minusItem: (state, action) => {
       const findItem = state.items.find((obj) => obj.id === action.payload);
       if (findItem) {
         findItem.count--;
       }
+      state.totalPrice = state.items.reduce((sum, item) => sum + item.price * item.count, 0);
     },
     removeItem(state, action) {
       state.items = state.items.filter((obj) => obj.id !== action.payload);
+      state.totalPrice = state.items.reduce((sum, item) => sum + item.price * item.count, 0);
     },
     clearItems: (state) => {
       state.items = [];

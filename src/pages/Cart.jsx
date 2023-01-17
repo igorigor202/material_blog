@@ -4,6 +4,7 @@ import Divider from '@mui/material/Divider';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import HomeIcon from '@mui/icons-material/Home';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem.jsx';
 import { clearItems } from '../redux/slices/cartSlice.js';
 import CartEmpty from '../components/CartEmpty.jsx';
@@ -22,8 +23,8 @@ const Cart = () => {
   }
 
   return (
-    <Box flex={25} sx={{ height: '100vh' }}>
-      <Box sx={{ p: '10px' }}>
+    <Box flex={25} sx={{ minHeight: '98vh' }}>
+      <Box sx={{ p: '15px' }}>
         <Box
           sx={{
             display: 'flex',
@@ -69,7 +70,7 @@ const Cart = () => {
             mt: '30px',
             justifyContent: 'space-between',
           }}>
-          <Button variant="outlined">
+          <Button component={Link} to="/material_blog" variant="outlined">
             <HomeIcon />
             Вернуться назад
           </Button>

@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -7,27 +7,26 @@ import {
   setSortType,
   setFilters,
 } from '../redux/slices/filterSlice.js';
+
 import React, { useState, useEffect, useRef } from 'react';
 import Post from '../components/Post.jsx';
 import Categories from '../components/Categories.jsx';
 import Preloader from '../components/Preloader.jsx';
 import Sort from '../components/Sort.jsx';
 import BasicPagination from '../components/BasicPagination.jsx';
-import axios from 'axios';
 import { useContext } from 'react';
 import { SearchContext } from '../App.js';
 import qs from 'qs';
+import { fetchSneakers } from '../redux/slices/sneakerSlice.js';
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { categoryId, sortType, currentPage } = useSelector((state) => state.filter);
+  const { posts, status } = useSelector((state) => state.sneaker);
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-
   const { searchValue } = useContext(SearchContext);
-  const [posts, setPosts] = useState([]);
-  const [isloading, setISLoading] = useState(false);
 
   const onChangeCategory = (id) => {
     console.log(id);
@@ -42,22 +41,28 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchSneakers = () => {
-    setISLoading(true);
-
+  const getSneakers = async () => {
     const sortBy = sortType.replace('-', '');
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    axios
-      .get(
-        `https://62fafe68abd610251c00224e.mockapi.io/posts?p=${currentPage}&l=5&${category}&sortBy=${sortBy}&order=${order}${search}`,
-      )
-      .then((res) => {
-        setPosts(res.data);
-        setISLoading(false);
-      });
+    // await axios
+    //   .get(
+    //     `https://62fafe68abd610251c00224e.mockapi.io/posts?p=${currentPage}&l=5&${category}&sortBy=${sortBy}&order=${order}${search}`,
+    //   )
+    //   .then((res) => {
+    //     setPosts(res.data);
+    //     setISLoading(false);
+    //     console.log(666);
+    //   })
+    //   .catch((err) => {
+    //     setISLoading(false);
+    //   });
+
+    dispatch(fetchSneakers({ sortBy, order, category, search, currentPage }));
+
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
@@ -84,7 +89,7 @@ const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!isSearch.current) {
-      fetchSneakers();
+      getSneakers();
     }
     isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
@@ -102,6 +107,8 @@ const Home = () => {
     />
   ));
 
+  const skeletons = [...new Array(6)].map((_, index) => <Preloader key={index} />);
+
   return (
     <Box flex={35}>
       <Box
@@ -116,12 +123,24 @@ const Home = () => {
       </Box>
 
       <Grid
+        sx={{}}
         container
         padding={{ xs: 1, sm: 1, md: 5 }}
         spacing={{ xs: 1, sm: 2, md: 3 }}
         justifyContent={{ xs: 'center', sm: 'flex-start', md: 'flex-start', lg: 'flex-start' }}
         alignItems="stretch">
-        {isloading ? [...new Array(6)].map((_, index) => <Preloader key={index} />) : sneakers}
+        {status === 'error' ? (
+          <Box>
+            <Typography variant="h2">Произошла ошибка</Typography>
+            <Typography
+              variant="body1"
+              sx={{ marginTop: '50px', fontSize: { xs: '17px', sm: '17px', md: '20px' } }}>
+              Не удалось получить данные по вещам. Попробуйте повторить попытку позже
+            </Typography>
+          </Box>
+        ) : (
+          <>{status === 'loading' ? skeletons : sneakers}</>
+        )}
       </Grid>
       <Box
         sx={{

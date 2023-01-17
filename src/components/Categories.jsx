@@ -11,7 +11,7 @@ const Categories = ({ categoryId, onChangeCategory }) => {
         flexDirection: 'row',
         width: { xs: '100%', sm: '100%', md: '100%', lg: '90%' },
         alignItems: 'center',
-        overflowX: { xs: 'scroll', sm: 'scroll  ', md: 'scroll', lg: 'visible' },
+        overflowX: { xs: 'scroll', sm: 'visible  ', md: 'visible', lg: 'visible' },
       }}>
       {categories.map((value, i) => (
         <Button

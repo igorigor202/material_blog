@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const CartEmpty = () => {
   return (
-    <Box flex={35} sx={{}}>
+    <Box flex={35} sx={{ height: '100vh' }}>
       <Typography variant="h2" sx={{ margin: '50px' }}>
         Ваша корзина пустая
       </Typography>
