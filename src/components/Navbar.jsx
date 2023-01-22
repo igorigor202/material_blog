@@ -15,14 +15,14 @@ import {
 import React, { useState } from 'react';
 import { FastfoodRounded, ShoppingBasket } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import { useContext } from 'react';
-import { SearchContext } from '../App.js';
 import { useRef } from 'react';
 import debounce from 'lodash.debounce';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setSearchValue } from '../redux/slices/filterSlice.js';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -85,34 +85,34 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openBurger, setOpenBurger] = useState(false);
-
-  const { setSearchValue } = useContext(SearchContext);
   const [value, setValue] = useState('');
 
   const inputRef = useRef();
 
   const onClearInput = () => {
-    setSearchValue('');
+    dispatch(setSearchValue(''));
     setValue('');
     inputRef.current.focus();
   };
 
   const updateSearchValue = useCallback(
     debounce((str) => {
-      setSearchValue(str);
+      dispatch(setSearchValue(str));
     }, 1000),
     [],
   );
+
+  const { items } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const location = useLocation();
 
   const onChangeInput = (event) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
-
-  const { items } = useSelector((state) => state.cart);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
   return (
     <AppBar position="sticky">
@@ -174,12 +174,13 @@ const Navbar = () => {
         </Search>
 
         <Icons>
-          <IconButton component={Link} to="/cart">
-            <Badge badgeContent={totalCount} color="success">
-              <ShoppingBasket />
-            </Badge>
-          </IconButton>
-
+          {location.pathname !== '/cart' && (
+            <IconButton component={Link} to="/cart">
+              <Badge badgeContent={totalCount} color="success">
+                <ShoppingBasket />
+              </Badge>
+            </IconButton>
+          )}
           <Avatar
             sx={{ width: 40, height: 40 }}
             src="https://avatarzo.ru/wp-content/uploads/squid-game-player456-2.jpg"

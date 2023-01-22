@@ -15,18 +15,16 @@ import Preloader from '../components/Preloader.jsx';
 import Sort from '../components/Sort.jsx';
 import BasicPagination from '../components/BasicPagination.jsx';
 import { useContext } from 'react';
-import { SearchContext } from '../App.js';
 import qs from 'qs';
 import { fetchSneakers } from '../redux/slices/sneakerSlice.js';
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { categoryId, sortType, currentPage } = useSelector((state) => state.filter);
+  const { categoryId, sortType, currentPage, searchValue } = useSelector((state) => state.filter);
   const { posts, status } = useSelector((state) => state.sneaker);
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  const { searchValue } = useContext(SearchContext);
 
   const onChangeCategory = (id) => {
     console.log(id);
@@ -46,19 +44,6 @@ const Home = () => {
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
-
-    // await axios
-    //   .get(
-    //     `https://62fafe68abd610251c00224e.mockapi.io/posts?p=${currentPage}&l=5&${category}&sortBy=${sortBy}&order=${order}${search}`,
-    //   )
-    //   .then((res) => {
-    //     setPosts(res.data);
-    //     setISLoading(false);
-    //     console.log(666);
-    //   })
-    //   .catch((err) => {
-    //     setISLoading(false);
-    //   });
 
     dispatch(fetchSneakers({ sortBy, order, category, search, currentPage }));
 

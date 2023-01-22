@@ -6,13 +6,17 @@ const initialState = {
   status: 'loading', //loading | success | error
 };
 
-export const fetchSneakers = createAsyncThunk('sneaker/fetchSneakersStatus', async (params) => {
-  const { sortBy, order, category, search, currentPage } = params;
-  const { data } = await axios.get(
-    `https://62fafe68abd610251c00224e.mockapi.io/posts?p=${currentPage}&l=5&${category}&sortBy=${sortBy}&order=${order}${search}`,
-  );
-  return data;
-});
+export const fetchSneakers = createAsyncThunk(
+  'sneaker/fetchSneakersStatus',
+  async (params, thunkApi) => {
+    const { sortBy, order, category, search, currentPage } = params;
+    const { data } = await axios.get(
+      `https://62fafe68abd610251c00224e.mockapi.io/posts?p=${currentPage}&l=5&${category}&sortBy=${sortBy}&order=${order}${search}`,
+    );
+    console.log(thunkApi);
+    return data;
+  },
+);
 
 export const sneakerSlice = createSlice({
   name: 'sneaker',
